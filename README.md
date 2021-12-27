@@ -1,6 +1,6 @@
 # Slingshot
 
-Slingshot is a small library for light and ergonomic functional programming in Swift.
+Slingshot is a (very early stage) small library for light and ergonomic functional programming in Swift.
 
 It is designed to fit nicely with existing Swift structures and enhance them with additional superpowers, like `Optional` and `Result`.
 
