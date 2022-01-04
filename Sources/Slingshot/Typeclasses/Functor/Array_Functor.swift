@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
     func replace<C>(with x: C) -> [C] {
         map(constant(x))
     }

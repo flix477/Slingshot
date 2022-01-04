@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Optional {
+public extension Optional {
     static func pure(_ x: Wrapped) -> Wrapped? {
         .some(x)
     }

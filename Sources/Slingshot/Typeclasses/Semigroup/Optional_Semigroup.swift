@@ -8,7 +8,7 @@
 import Foundation
 
 extension Optional: Semigroup where Wrapped: Semigroup {
-    static func <> (lhs: Wrapped?, rhs: Wrapped?) -> Wrapped? {
+    public static func <> (lhs: Wrapped?, rhs: Wrapped?) -> Wrapped? {
         switch (lhs, rhs) {
         case (.none, let b):
             return b

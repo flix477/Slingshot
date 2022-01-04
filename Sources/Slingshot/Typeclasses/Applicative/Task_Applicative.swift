@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Task {
+public extension Task {
     static func pure(_ x: Value) -> Task<Value> {
         Task { handler in handler(x) }
     }

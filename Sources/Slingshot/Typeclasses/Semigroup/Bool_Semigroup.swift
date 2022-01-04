@@ -8,7 +8,7 @@
 import Foundation
 
 extension Bool: Semigroup {
-    static func <> (lhs: Bool, rhs: Bool) -> Bool {
+    public static func <> (lhs: Bool, rhs: Bool) -> Bool {
         lhs || rhs
     }
 }

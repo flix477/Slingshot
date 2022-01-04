@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol ResultProtocol {
+public protocol ResultProtocol {
     associatedtype Failure: Error
     associatedtype Success
 
     var result: Result<Success, Failure> { get }
 }
 
-extension ResultProtocol {
+public extension ResultProtocol {
     var failure: Failure? {
         if case .failure(let error) = result { return error } else { return nil }
     }
@@ -24,7 +24,7 @@ extension ResultProtocol {
     }
 }
 
-extension Result {
+public extension Result {
     var either: Either<Failure, Success> {
         switch self {
         case .success(let x): return .right(x)
@@ -45,5 +45,5 @@ extension Result {
 }
 
 extension Result: ResultProtocol {
-    var result: Result<Success, Failure> { self }
+    public var result: Result<Success, Failure> { self }
 }

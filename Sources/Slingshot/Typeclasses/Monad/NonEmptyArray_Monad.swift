@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension NonEmptyArray {
+public extension NonEmptyArray {
     func flatMap<C>(_ transform: @escaping (Element) throws -> NonEmptyArray<C>) rethrows -> NonEmptyArray<C> {
         var result = try transform(first)
         for x in rest {

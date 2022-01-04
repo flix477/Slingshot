@@ -8,7 +8,7 @@
 import Foundation
 
 extension Double: Semigroup {
-    static func <> (lhs: Double, rhs: Double) -> Double {
+    public static func <> (lhs: Double, rhs: Double) -> Double {
         lhs + rhs
     }
 }

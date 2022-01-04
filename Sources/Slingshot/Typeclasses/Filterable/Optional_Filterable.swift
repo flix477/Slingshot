@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Optional {
+public extension Optional {
     func filter(_ shouldKeep: @escaping (Wrapped) -> Bool) -> Wrapped? {
         switch self {
         case .some(let x) where shouldKeep(x):

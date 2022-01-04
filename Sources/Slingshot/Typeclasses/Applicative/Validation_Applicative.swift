@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Validation {
+public extension Validation {
     static func pure<T>(_ x: T) -> Validation<Failure, T> {
         return .success(x)
     }

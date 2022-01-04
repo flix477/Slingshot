@@ -8,7 +8,7 @@
 import Foundation
 
 extension Set: Semigroup {
-    static func <> (lhs: Set<Element>, rhs: Set<Element>) -> Set<Element> {
+    public static func <> (lhs: Set<Element>, rhs: Set<Element>) -> Set<Element> {
         lhs.union(rhs)
     }
 }

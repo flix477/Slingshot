@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol OptionalProtocol {
+public protocol OptionalProtocol {
     associatedtype Wrapped
     var value: Wrapped? { get }
 }
 
 extension Optional: OptionalProtocol {
-    var value: Wrapped? { self }
+    public var value: Wrapped? { self }
 }
 
-extension Sequence {
+public extension Sequence {
     func compactCast<T>(as type: T.Type) -> [T] {
         compactMap { $0 as? T }
     }

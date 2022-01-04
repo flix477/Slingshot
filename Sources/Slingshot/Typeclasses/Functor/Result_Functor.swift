@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Result {
+public extension Result {
     func replace<C>(with x: C) -> Result<C, Failure> {
         map(constant(x))
     }

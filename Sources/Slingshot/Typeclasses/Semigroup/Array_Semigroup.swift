@@ -8,7 +8,7 @@
 import Foundation
 
 extension Array: Semigroup {
-    static func <> (lhs: [Element], rhs: [Element]) -> [Element] {
+    public static func <> (lhs: [Element], rhs: [Element]) -> [Element] {
         lhs + rhs
     }
 }

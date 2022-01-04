@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Either {
+public extension Either {
     static func pure<T>(_ x: T) -> Either<L, T> {
         .right(x)
     }

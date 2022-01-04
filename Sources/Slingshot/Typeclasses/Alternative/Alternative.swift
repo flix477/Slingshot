@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol Alternative {
+public protocol Alternative {
     func alt(_ x: Self) -> Self
 }
 
-extension Alternative where Self: BoolCoercible {
+public extension Alternative where Self: BoolCoercible {
     func alt(_ x: Self) -> Self {
         return bool ? self : x
     }

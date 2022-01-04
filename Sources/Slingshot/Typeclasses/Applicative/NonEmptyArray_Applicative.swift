@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension NonEmptyArray {
+public extension NonEmptyArray {
     static func pure<T>(_ x: T) -> NonEmptyArray<T> {
         NonEmptyArray<T>(first: x, rest: [])
     }

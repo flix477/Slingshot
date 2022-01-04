@@ -7,9 +7,9 @@
 
 import Foundation
 
-protocol Monoid: Semigroup, Zero {}
+public protocol Monoid: Semigroup, Zero {}
 
-extension Monoid {
+public extension Monoid {
     static func concat(values: [Self]) -> Self {
         values.reduce { a, b in a <> b }
     }

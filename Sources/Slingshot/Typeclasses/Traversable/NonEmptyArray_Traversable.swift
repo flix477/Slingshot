@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension NonEmptyArray {
+public extension NonEmptyArray {
     func traverse<T>(_ transform: @escaping (Element) -> T?) -> NonEmptyArray<T>? {
         guard let initial = transform(first) else { return nil }
 
@@ -53,31 +53,31 @@ extension NonEmptyArray {
 }
 
 extension NonEmptyArray where Element: OptionalProtocol {
-    var sequenced: NonEmptyArray<Element.Wrapped>? {
+    public var sequenced: NonEmptyArray<Element.Wrapped>? {
         traverse(\.value)
     }
 }
 
 extension NonEmptyArray where Element: ValidationProtocol {
-    var sequenced: Validation<Element.Failure, NonEmptyArray<Element.Value>> {
+    public var sequenced: Validation<Element.Failure, NonEmptyArray<Element.Value>> {
         traverse(\.validation)
     }
 }
 
 extension NonEmptyArray where Element: EitherProtocol {
-    var sequenced: Either<Element.L, NonEmptyArray<Element.R>> {
+    public var sequenced: Either<Element.L, NonEmptyArray<Element.R>> {
         traverse(\.either)
     }
 }
 
 extension NonEmptyArray where Element: ResultProtocol {
-    var sequenced: Result<NonEmptyArray<Element.Success>, Element.Failure> {
+    public var sequenced: Result<NonEmptyArray<Element.Success>, Element.Failure> {
         traverse(\.result)
     }
 }
 
 extension NonEmptyArray where Element: TaskProtocol {
-    var sequenced: Task<NonEmptyArray<Element.Value>> {
+    public var sequenced: Task<NonEmptyArray<Element.Value>> {
         traverse(\.task)
     }
 }

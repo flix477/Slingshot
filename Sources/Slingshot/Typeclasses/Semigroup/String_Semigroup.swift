@@ -8,7 +8,7 @@
 import Foundation
 
 extension String: Semigroup {
-    static func <> (lhs: String, rhs: String) -> String {
+    public static func <> (lhs: String, rhs: String) -> String {
        lhs + rhs
     }
 }

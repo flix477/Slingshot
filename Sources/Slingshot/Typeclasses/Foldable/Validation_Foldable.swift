@@ -8,9 +8,9 @@
 import Foundation
 
 extension Validation: Foldable {
-    typealias FoldableA = Value
+    public typealias FoldableA = Value
 
-    func reduce<Output>(_ initialResult: Output, _ nextPartialResult: (Output, Value) throws -> Output) rethrows -> Output {
+    public func reduce<Output>(_ initialResult: Output, _ nextPartialResult: (Output, Value) throws -> Output) rethrows -> Output {
         switch self {
         case .success(let x):
             return try nextPartialResult(initialResult, x)
@@ -19,7 +19,7 @@ extension Validation: Foldable {
         }
     }
 
-    func reduce<Output>(into initialResult: Output, _ updateAccumulatingResult: (inout Output, Value) throws -> ()) rethrows -> Output {
+    public func reduce<Output>(into initialResult: Output, _ updateAccumulatingResult: (inout Output, Value) throws -> ()) rethrows -> Output {
         var result = initialResult
         if case .success(let value) = self {
             try updateAccumulatingResult(&result, value)

@@ -14,6 +14,6 @@ precedencegroup SemigroupPrecedence {
 
 infix operator <>: SemigroupPrecedence
 
-protocol Semigroup {
+public protocol Semigroup {
     static func <> (lhs: Self, rhs: Self) -> Self
 }

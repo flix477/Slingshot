@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
     static func pure<T>(_ x: T) -> [T] {
         [x]
     }

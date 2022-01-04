@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Optional {
+public extension Optional {
     func replace<C>(with x: C) -> C? {
         map(constant(x))
     }

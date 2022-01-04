@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NonEmptyArray<Element> {
+public struct NonEmptyArray<Element> {
     let first: Element
     private(set) var rest: [Element]
 
@@ -24,7 +24,7 @@ struct NonEmptyArray<Element> {
     }
 }
 
-extension NonEmptyArray {
+public extension NonEmptyArray {
     init?(array: [Element]) {
         guard let firstItem = array.first else { return nil }
 
@@ -33,12 +33,12 @@ extension NonEmptyArray {
 }
 
 extension NonEmptyArray: Sequence {
-    func makeIterator() -> NonEmptyArrayIterator<Element> {
+    public func makeIterator() -> NonEmptyArrayIterator<Element> {
         NonEmptyArrayIterator(source: self)
     }
 }
 
-struct NonEmptyArrayIterator<Element>: IteratorProtocol {
+public struct NonEmptyArrayIterator<Element>: IteratorProtocol {
     private var count = 0
     let source: NonEmptyArray<Element>
 
@@ -46,7 +46,7 @@ struct NonEmptyArrayIterator<Element>: IteratorProtocol {
         self.source = source
     }
 
-    mutating func next() -> Element? {
+    public mutating func next() -> Element? {
         defer { count += 1 }
 
         return count == 0

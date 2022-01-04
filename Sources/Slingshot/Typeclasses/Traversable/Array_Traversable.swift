@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
     func traverse<T>(_ transform: @escaping (Element) -> T?) -> [T]? {
         reduce(into: []) { result, value in
             if let value = transform(value) {
@@ -70,31 +70,31 @@ extension Array {
     }
 }
 
-extension Array where Element: OptionalProtocol {
+public extension Array where Element: OptionalProtocol {
     var sequenced: [Element.Wrapped]? {
         traverse(\.value)
     }
 }
 
-extension Array where Element: ValidationProtocol {
+public extension Array where Element: ValidationProtocol {
     var sequenced: Validation<Element.Failure, [Element.Value]> {
         traverse(\.validation)
     }
 }
 
-extension Array where Element: EitherProtocol {
+public extension Array where Element: EitherProtocol {
     var sequenced: Either<Element.L, [Element.R]> {
         traverse(\.either)
     }
 }
 
-extension Array where Element: ResultProtocol {
+public extension Array where Element: ResultProtocol {
     var sequenced: Result<[Element.Success], Element.Failure> {
         traverse(\.result)
     }
 }
 
-extension Array where Element: TaskProtocol {
+public extension Array where Element: TaskProtocol {
     var sequenced: Task<[Element.Value]> {
         traverse(\.task)
     }

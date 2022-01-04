@@ -8,9 +8,9 @@
 import Foundation
 
 extension Optional: Foldable {
-    typealias FoldableA = Wrapped
+    public typealias FoldableA = Wrapped
 
-    func reduce<Result>(_ initialResult: Result, _ nextPartialResult: (Result, Wrapped) throws -> Result) rethrows -> Result {
+    public func reduce<Result>(_ initialResult: Result, _ nextPartialResult: (Result, Wrapped) throws -> Result) rethrows -> Result {
         switch self {
         case .some(let x):
             return try nextPartialResult(initialResult, x)
@@ -19,7 +19,7 @@ extension Optional: Foldable {
         }
     }
 
-    func reduce<Result>(into initialResult: Result, _ updateAccumulatingResult: (inout Result, Wrapped) throws -> ()) rethrows -> Result {
+    public func reduce<Result>(into initialResult: Result, _ updateAccumulatingResult: (inout Result, Wrapped) throws -> ()) rethrows -> Result {
         var result = initialResult
         if let value = self {
             try updateAccumulatingResult(&result, value)

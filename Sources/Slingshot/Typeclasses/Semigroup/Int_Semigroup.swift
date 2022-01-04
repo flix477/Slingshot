@@ -8,7 +8,7 @@
 import Foundation
 
 extension Int: Semigroup {
-    static func <> (lhs: Int, rhs: Int) -> Int {
+    public static func <> (lhs: Int, rhs: Int) -> Int {
         lhs + rhs
     }
 }

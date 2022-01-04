@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Task {
+public extension Task {
     func flatMap<C>(_ transform: @escaping (Value) -> Task<C>) -> Task<C> {
         Task<C> { handler in
             self.onCompletion { data in

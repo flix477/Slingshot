@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Validation {
+public extension Validation {
     func map<C>(_ transform: (Value) throws -> C) rethrows -> Validation<Failure, C> {
         switch self {
         case .success(let x):

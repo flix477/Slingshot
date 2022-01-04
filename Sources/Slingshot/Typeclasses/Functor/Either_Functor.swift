@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Either {
+public extension Either {
     func map<U>(_ transform: (R) throws -> U) rethrows -> Either<L, U> {
         switch self {
         case .right(let x):

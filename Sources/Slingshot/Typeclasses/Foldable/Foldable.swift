@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol Foldable {
+public protocol Foldable {
     associatedtype FoldableA
 
     func reduce<Output>(_ initialResult: Output, _ nextPartialResult: (Output, FoldableA) throws -> Output) rethrows -> Output
     func reduce<Output>(into initialResult: Output, _ updateAccumulatingResult: (inout Output, FoldableA) throws -> ()) rethrows -> Output
 }
 
-extension Foldable {
+public extension Foldable {
     func reduce<Output: Monoid>(_ nextPartialResult: (Output, FoldableA) throws -> Output) rethrows -> Output {
         try reduce(Output.zero, nextPartialResult)
     }

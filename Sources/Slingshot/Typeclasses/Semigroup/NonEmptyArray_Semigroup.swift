@@ -8,7 +8,7 @@
 import Foundation
 
 extension NonEmptyArray: Semigroup {
-    static func <> (lhs: NonEmptyArray<Element>, rhs: NonEmptyArray<Element>) -> NonEmptyArray<Element> {
+    public static func <> (lhs: NonEmptyArray<Element>, rhs: NonEmptyArray<Element>) -> NonEmptyArray<Element> {
         NonEmptyArray(first: lhs.first, rest: lhs.rest <> rhs.asArray)
     }
 }

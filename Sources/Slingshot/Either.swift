@@ -7,19 +7,19 @@
 
 import Foundation
 
-protocol EitherProtocol {
+public protocol EitherProtocol {
     associatedtype L
     associatedtype R
 
     var either: Either<L, R> { get }
 }
 
-enum Either<L, R> {
+public enum Either<L, R> {
     case right(R)
     case left(L)
 }
 
-extension Either {
+public extension Either {
     var left: L? {
         switch self {
         case .left(let x): return .pure(x)
@@ -59,7 +59,7 @@ extension Either {
     }
 }
 
-extension Either where L: Error {
+public extension Either where L: Error {
     var result: Result<R, L> {
         switch self {
         case .right(let r):
@@ -71,5 +71,5 @@ extension Either where L: Error {
 }
 
 extension Either: EitherProtocol {
-    var either: Either<L, R> { self }
+    public var either: Either<L, R> { self }
 }

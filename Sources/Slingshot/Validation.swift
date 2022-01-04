@@ -7,19 +7,19 @@
 
 import Foundation
 
-protocol ValidationProtocol {
+public protocol ValidationProtocol {
     associatedtype Failure
     associatedtype Value
 
     var validation: Validation<Failure, Value> { get }
 }
 
-enum Validation<Failure, Value> {
+public enum Validation<Failure, Value> {
     case success(Value)
     case failure(NonEmptyArray<Failure>)
 }
 
-extension Validation {
+public extension Validation {
     static func fail(_ error: Failure) -> Validation<Failure, Value> {
         .failure(.pure(error))
     }
@@ -54,5 +54,5 @@ extension Validation {
 }
 
 extension Validation: ValidationProtocol {
-    var validation: Validation<Failure, Value> { self }
+    public var validation: Validation<Failure, Value> { self }
 }

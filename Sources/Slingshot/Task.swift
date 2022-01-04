@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol TaskProtocol {
+public protocol TaskProtocol {
     associatedtype Value
 
     var task: Task<Value> { get }
 }
 
-class Task<Value> {
+public class Task<Value> {
     typealias TaskFn = (@escaping (Value) -> ()) -> ()
 
     fileprivate let _f: TaskFn
@@ -37,10 +37,10 @@ class Task<Value> {
 }
 
 extension Task: TaskProtocol {
-    var task: Task<Value> { self }
+    public var task: Task<Value> { self }
 }
 
-extension DispatchQueue {
+public extension DispatchQueue {
     func run<Value>(_ task: Task<Value>, completion: ((Value) -> Void)? = nil) {
         self.async {
             task.onCompletion { x in completion?(x) }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Result {
+public extension Result {
     static func pure<T>(_ x: T) -> Result<T, Failure> {
         .success(x)
     }

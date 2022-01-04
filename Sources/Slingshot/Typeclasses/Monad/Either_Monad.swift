@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Either {
+public extension Either {
     func flatMap<C>(_ transform: @escaping (R) throws -> Either<L, C>) rethrows -> Either<L, C> {
         switch self {
         case .right(let x):
