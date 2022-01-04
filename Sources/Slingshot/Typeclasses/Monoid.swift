@@ -11,7 +11,7 @@ public protocol Monoid: Semigroup, Zero {}
 
 public extension Monoid {
     static func concat(values: [Self]) -> Self {
-        values.reduceFromZero { a, b in a <> b }
+        values.reduce { a, b in a <> b }
     }
 }
 
