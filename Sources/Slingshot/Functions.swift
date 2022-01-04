@@ -26,24 +26,3 @@ func constant<T, V>(_ x: T) -> (V) -> T {
 func identity<T>(_ x: T) -> T {
     x
 }
-
-precedencegroup CompositionPrecedence {
-    associativity: left
-}
-
-infix operator >>>: CompositionPrecedence
-
-func >>> <A, B, C>(lhs: @escaping (A) -> B, rhs: @escaping (B) -> C) -> (A) -> C {
-    compose(f: lhs, g: rhs)
-}
-
-precedencegroup PipePrecedence {
-    associativity: left
-    higherThan: FunctorPrecedence
-}
-
-infix operator |>: PipePrecedence
-
-func |> <A, B>(lhs: A, rhs: @escaping (A) -> B) -> B {
-    pipe(x: lhs, f: rhs)
-}

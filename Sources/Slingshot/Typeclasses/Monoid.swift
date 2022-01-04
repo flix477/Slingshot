@@ -1,0 +1,25 @@
+//
+//  File.swift
+//  
+//
+//  Created by Felix Leveille on 2022-01-03.
+//
+
+import Foundation
+
+protocol Monoid: Semigroup, Zero {}
+
+extension Monoid {
+    static func concat(values: [Self]) -> Self {
+        values.reduce { a, b in a <> b }
+    }
+}
+
+extension Array: Monoid {}
+extension Bool: Monoid {}
+extension Double: Monoid {}
+extension String: Monoid {}
+extension Set: Monoid {}
+extension Int: Monoid {}
+
+extension Optional: Monoid where Wrapped: Semigroup {}

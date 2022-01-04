@@ -7,6 +7,23 @@
 
 import Foundation
 
+protocol ResultProtocol {
+    associatedtype Failure: Error
+    associatedtype Success
+
+    var result: Result<Success, Failure> { get }
+}
+
+extension ResultProtocol {
+    var failure: Failure? {
+        if case .failure(let error) = result { return error } else { return nil }
+    }
+
+    var success: Success? {
+        if case .success(let success) = result { return success } else { return nil }
+    }
+}
+
 extension Result {
     var either: Either<Failure, Success> {
         switch self {
@@ -27,75 +44,6 @@ extension Result {
     }
 }
 
-extension Result: Applicative {
-    typealias ApplicativeA = Success
-
-    static func pure<T>(_ x: T) -> Result<T, Failure> {
-        return .success(x)
-    }
-
-    static func ap<O>(rhs: Result<(Success) -> O, Failure>, lhs: Result<Success, Failure>) -> Result<O, Failure> where Failure: Semigroup {
-        switch (rhs, lhs) {
-        case (.success(let f), .success(let x)):
-            return .pure(f(x))
-        case (.success, .failure(let e)):
-            return .failure(e)
-        case (.failure(let e), .success):
-            return .failure(e)
-        case (.failure(let e1), .failure(let e2)):
-            return .failure(e1 <> e2)
-        }
-    }
-}
-
-extension Result: Functor {
-    typealias FunctorValue = Success
-
-    func map<C>(_ transform: @escaping (Success) -> C) -> Result<C, Failure> {
-        switch self {
-        case .success(let x):
-            return .pure(transform(x))
-        case .failure(let x):
-            return .failure(x)
-        }
-    }
-
-
-    static func !> <C>(lhs: Self, transform: @escaping (Success) -> C) -> Result<C, Failure> {
-        lhs.map(transform)
-    }
-}
-
-extension Result: Bifunctor {
-    typealias BifunctorA = Failure
-
-    func mapLeft<C>(_ transform: @escaping (Failure) -> C) -> Result<Success, C> {
-        switch self {
-        case .success(let x):
-            return .success(x)
-        case .failure(let x):
-            return .failure(transform(x))
-        }
-    }
-
-    func bimap<C, D>(onLeft: @escaping (Failure) -> C, onRight: @escaping (Success) -> D) -> Result<D, C> {
-        return map(onRight).mapLeft(onLeft)
-    }
-}
-
-extension Result: Monad {
-    typealias MonadA = Success
-
-    func flatMap<C>(_ binder: @escaping (Success) -> Result<C, Failure>) -> Result<C, Failure> {
-        switch self {
-        case .success(let x):
-            return binder(x)
-        case .failure(let x):
-            return .failure(x)
-        }
-    }
-
-    static func |>> <C>(lhs: Self, rhs: @escaping (Success) -> Result<C, Failure>) -> Result<C, Failure> {
-        return lhs.flatMap(rhs)
-    }
+extension Result: ResultProtocol {
+    var result: Result<Success, Failure> { self }
 }

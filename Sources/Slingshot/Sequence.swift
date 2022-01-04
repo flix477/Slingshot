@@ -23,7 +23,7 @@ extension Sequence {
 }
 
 extension Sequence where Element: OptionalProtocol {
-    var compact: [Element.Wrapped] {
+    var compacted: [Element.Wrapped] {
         compactMap(\.value)
     }
 }

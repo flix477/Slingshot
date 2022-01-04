@@ -9,7 +9,7 @@ import Foundation
 
 precedencegroup SemigroupPrecedence {
     associativity: left
-    higherThan: AlternativePrecedence
+    higherThan: NilCoalescingPrecedence
 }
 
 infix operator <>: SemigroupPrecedence

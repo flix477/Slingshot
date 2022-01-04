@@ -12,7 +12,7 @@ protocol BoolCoercible {
     var bool: Bool { get }
 }
 
-extension BoolCoercible where Self: Equatable, Self: Zero {
+extension BoolCoercible where Self: Equatable, Self: Monoid {
     var bool: Bool { return self == .zero }
 }
 
@@ -27,3 +27,11 @@ extension Dictionary: BoolCoercible {
 extension Int: BoolCoercible {}
 extension Double: BoolCoercible {}
 extension String: BoolCoercible {}
+
+extension Array: BoolCoercible {
+    var bool: Bool { isEmpty }
+}
+
+extension Optional: BoolCoercible {
+    var bool: Bool { self != nil }
+}

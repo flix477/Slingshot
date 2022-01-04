@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol EitherProtocol {
+    associatedtype L
+    associatedtype R
+
+    var either: Either<L, R> { get }
+}
+
 enum Either<L, R> {
     case right(R)
     case left(L)
@@ -37,78 +44,18 @@ extension Either {
     static func consume(onLeft: @escaping (L) -> (), onRight: @escaping (R) -> ()) -> (Either<L, R>) -> () {
         return { x in x.consume(onLeft: onLeft, onRight: onRight) }
     }
-}
 
-extension Either: Applicative {
-    typealias ApplicativeA = R
-
-    static func pure<T>(_ x: T) -> Either<L, T> {
-        return .right(x)
-    }
-
-    static func ap<O>(rhs: Either<L, (R) -> O>, lhs: Either<L, R>) -> Either<L, O> where L: Semigroup {
-        switch (rhs, lhs) {
-        case (.right(let f), .right(let x)):
-            return .pure(f(x))
-        case (.right, .left(let e)):
-            return .left(e)
-        case (.left(let e), .right):
-            return .left(e)
-        case (.left(let e1), .left(let e2)):
-            return .left(e1 <> e2)
-        }
-    }
-}
-
-extension Either: Functor {
-    typealias FunctorValue = R
-
-    func map<C>(_ transform: @escaping (R) -> C) -> Either<L, C> {
-        switch self {
-        case .right(let x):
-            return .pure(transform(x))
-        case .left(let x):
-            return .left(x)
-        }
-    }
-
-
-    static func !> <C>(lhs: Self, transform: @escaping (R) -> C) -> Either<L, C> {
-        lhs.map(transform)
-    }
-}
-
-extension Either: Bifunctor {
-    typealias BifunctorA = L
-
-    func mapLeft<C>(_ transform: @escaping (L) -> C) -> Either<C, R> {
+    func mapLeft<C>(_ transform: @escaping (L) throws -> C) rethrows -> Either<C, R> {
         switch self {
         case .right(let x):
             return .right(x)
         case .left(let x):
-            return .left(transform(x))
+            return .left(try transform(x))
         }
     }
 
-    func bimap<C, D>(onLeft: @escaping (L) -> C, onRight: @escaping (R) -> D) -> Either<C, D> {
-        return map(onRight).mapLeft(onLeft)
-    }
-}
-
-extension Either: Monad {
-    typealias MonadA = R
-
-    func flatMap<C>(_ binder: @escaping (R) -> Either<L, C>) -> Either<L, C> {
-        switch self {
-        case .right(let x):
-            return binder(x)
-        case .left(let x):
-            return .left(x)
-        }
-    }
-
-    static func |>> <C>(lhs: Self, rhs: @escaping (R) -> Either<L, C>) -> Either<L, C> {
-        return lhs.flatMap(rhs)
+    func bimap<C, D>(onLeft: @escaping (L) throws -> C, onRight: @escaping (R) throws -> D) rethrows -> Either<C, D> {
+        return try map(onRight).mapLeft(onLeft)
     }
 }
 
@@ -121,4 +68,8 @@ extension Either where L: Error {
             return .failure(l)
         }
     }
+}
+
+extension Either: EitherProtocol {
+    var either: Either<L, R> { self }
 }
