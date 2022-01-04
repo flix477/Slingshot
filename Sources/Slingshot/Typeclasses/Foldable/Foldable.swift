@@ -15,11 +15,11 @@ public protocol Foldable {
 }
 
 public extension Foldable {
-    func reduce<Output: Monoid>(_ nextPartialResult: (Output, FoldableA) throws -> Output) rethrows -> Output {
+    func reduce<Output: Zero>(_ nextPartialResult: (Output, FoldableA) throws -> Output) rethrows -> Output {
         try reduce(Output.zero, nextPartialResult)
     }
 
-    func reduce<Output: Monoid>(_ updateAccumulatingResult: (inout Output, FoldableA) throws -> ()) rethrows -> Output {
+    func reduce<Output: Zero>(_ updateAccumulatingResult: (inout Output, FoldableA) throws -> ()) rethrows -> Output {
         try reduce(into: Output.zero, updateAccumulatingResult)
     }
 
