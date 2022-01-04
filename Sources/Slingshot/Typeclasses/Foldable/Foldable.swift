@@ -15,21 +15,21 @@ public protocol Foldable {
 }
 
 public extension Foldable {
-    func reduce<Output: Zero>(_ nextPartialResult: (Output, FoldableA) throws -> Output) rethrows -> Output {
+    func reduceFromZero<Output: Zero>(_ nextPartialResult: (Output, FoldableA) throws -> Output) rethrows -> Output {
         try reduce(Output.zero, nextPartialResult)
     }
 
-    func reduce<Output: Zero>(_ updateAccumulatingResult: (inout Output, FoldableA) throws -> ()) rethrows -> Output {
+    func reduceFromZero<Output: Zero>(_ updateAccumulatingResult: (inout Output, FoldableA) throws -> ()) rethrows -> Output {
         try reduce(into: Output.zero, updateAccumulatingResult)
     }
 
     var asArray: [FoldableA] {
-        reduce { result, value in
+        reduceFromZero { result, value in
             result.append(value)
         }
     }
 
     var count: Int {
-        reduce { result, _ in result + 1 }
+        reduceFromZero { result, _ in result + 1 }
     }
 }
