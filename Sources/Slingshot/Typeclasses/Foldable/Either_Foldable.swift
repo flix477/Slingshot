@@ -25,6 +25,6 @@ extension Either: Foldable {
             try updateAccumulatingResult(&result, value)
         }
 
-        return initialResult
+        return result
     }
 }
