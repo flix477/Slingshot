@@ -16,7 +16,7 @@ public protocol TaskProtocol {
 public class Task<Value> {
     typealias TaskFn = (@escaping (Value) -> ()) -> ()
 
-    fileprivate let _f: TaskFn
+    let _f: TaskFn
 
     init(_ f: @escaping TaskFn) {
         self._f = f
