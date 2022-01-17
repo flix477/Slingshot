@@ -14,19 +14,19 @@ public protocol TaskProtocol {
 }
 
 public class Task<Value> {
-    typealias TaskFn = (@escaping (Value) -> ()) -> ()
+    public typealias TaskFn = (@escaping (Value) -> ()) -> ()
 
     let _f: TaskFn
 
-    init(_ f: @escaping TaskFn) {
+    public init(_ f: @escaping TaskFn) {
         self._f = f
     }
 
-    func onCompletion(_ handler: @escaping (Value) -> ()) {
+    public func onCompletion(_ handler: @escaping (Value) -> ()) {
         _f(handler)
     }
 
-    func inspect(_ fn: @escaping (Value) -> ()) -> Task<Value> {
+    public func inspect(_ fn: @escaping (Value) -> ()) -> Task<Value> {
         Task<Value> { handler in
             self.onCompletion { data in
                 fn(data)
