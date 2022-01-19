@@ -10,7 +10,7 @@ import Foundation
 public struct Reader<Dependency, Result> {
     public let f: (Dependency) -> Result
 
-    init(_ f: @escaping (Dependency) -> Result) {
+    public init(_ f: @escaping (Dependency) -> Result) {
         self.f = f
     }
 
