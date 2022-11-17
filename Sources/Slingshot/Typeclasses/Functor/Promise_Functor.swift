@@ -7,16 +7,16 @@
 
 import Foundation
 
-public extension Task {
-    func map<C>(_ transform: @escaping (Value) -> C) -> Task<C> {
-        Task<C> { handler in
+public extension Promise {
+    func map<C>(_ transform: @escaping (Value) -> C) -> Promise<C> {
+        Promise<C> { handler in
             self.onCompletion { data in
                 handler(transform(data))
             }
         }
     }
 
-    func replace<C>(with x: C) -> Task<C> {
+    func replace<C>(with x: C) -> Promise<C> {
         map(constant(x))
     }
 }

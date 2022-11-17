@@ -30,6 +30,44 @@ public extension NonEmptyArray {
 
         self.init(first: firstItem, rest: Array(array.dropFirst()))
     }
+    
+    var last: Element {
+        rest.last ?? first
+    }
+    
+    func min(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows -> Element {
+        var minValue = first
+        for x in rest {
+            if try !areInIncreasingOrder(minValue, x) {
+                minValue = x
+            }
+        }
+        
+        return minValue
+    }
+    
+    func max(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows -> Element {
+        var maxValue = first
+        for x in rest {
+            if try !areInIncreasingOrder(x, maxValue) {
+                maxValue = x
+            }
+        }
+        
+        return maxValue
+    }
+    
+    subscript(optional i: Int) -> Element? {
+        count > i ? self[i] : nil
+    }
+    
+    subscript(index: Int) -> Element {
+        index == 0 ? first : rest[index - 1]
+    }
+    
+    var count: Int {
+        rest.count + 1
+    }
 }
 
 extension NonEmptyArray: Sequence {

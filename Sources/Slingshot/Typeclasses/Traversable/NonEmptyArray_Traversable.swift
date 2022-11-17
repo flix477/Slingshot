@@ -23,8 +23,8 @@ public extension NonEmptyArray {
         }
     }
 
-    func traverse<T>(_ transform: @escaping (Element) -> Task<T>) -> Task<NonEmptyArray<T>> {
-        Task<NonEmptyArray<T>> { handler in
+    func traverse<T>(_ transform: @escaping (Element) -> Promise<T>) -> Promise<NonEmptyArray<T>> {
+        Promise<NonEmptyArray<T>> { handler in
             asArray.traverse(transform).onCompletion { results in
                 if let results = NonEmptyArray<T>(array: results) {
                     handler(results)
@@ -76,8 +76,8 @@ extension NonEmptyArray where Element: ResultProtocol {
     }
 }
 
-extension NonEmptyArray where Element: TaskProtocol {
-    public var sequenced: Task<NonEmptyArray<Element.Value>> {
-        traverse(\.task)
+extension NonEmptyArray where Element: PromiseProtocol {
+    public var sequenced: Promise<NonEmptyArray<Element.Value>> {
+        traverse(\.promise)
     }
 }

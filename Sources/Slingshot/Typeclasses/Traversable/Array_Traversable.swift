@@ -31,8 +31,8 @@ public extension Array {
         }
     }
 
-    func traverse<T>(_ transform: @escaping (Element) -> Task<T>) -> Task<[T]> {
-        Task<[T]> { handler in
+    func traverse<T>(_ transform: @escaping (Element) -> Promise<T>) -> Promise<[T]> {
+        Promise<[T]> { handler in
             var completedResults: [Int: T] = [:]
 
             for (i, input) in enumerated() {
@@ -94,8 +94,8 @@ public extension Array where Element: ResultProtocol {
     }
 }
 
-public extension Array where Element: TaskProtocol {
-    var sequenced: Task<[Element.Value]> {
-        traverse(\.task)
+public extension Array where Element: PromiseProtocol {
+    var sequenced: Promise<[Element.Value]> {
+        traverse(\.promise)
     }
 }

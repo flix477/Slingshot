@@ -12,15 +12,15 @@ public protocol BoolCoercible {
 }
 
 public extension BoolCoercible where Self: Equatable, Self: Monoid {
-    var bool: Bool { return self == .zero }
+    var bool: Bool { self == .zero }
 }
 
 extension Bool: BoolCoercible {
-    public var bool: Bool { return self }
+    public var bool: Bool { self }
 }
 
 extension Dictionary: BoolCoercible {
-    public var bool: Bool { return isEmpty }
+    public var bool: Bool { isEmpty }
 }
 
 extension Int: BoolCoercible {}
