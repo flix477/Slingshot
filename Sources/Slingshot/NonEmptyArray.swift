@@ -8,7 +8,7 @@
 import Foundation
 
 public struct NonEmptyArray<Element> {
-    let first: Element
+    public let first: Element
     private(set) var rest: [Element]
 
     var asArray: [Element] {
