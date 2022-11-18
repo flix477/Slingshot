@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 13.0, *)
 @available(macOS 10.15, *)
 public extension Binding {
     func invmap<T>(_ transform: @escaping (Value) -> T, _ transformBack: @escaping (T) -> Value) -> Binding<T> {
