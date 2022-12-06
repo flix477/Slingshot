@@ -7,11 +7,15 @@
 
 import Foundation
 
-public extension Optional {
-    static func pure(_ x: Wrapped) -> Wrapped? {
+extension Optional: Pure {
+    public typealias PureA = Wrapped
+    
+    public static func pure(_ x: Wrapped) -> Wrapped? {
         .some(x)
     }
+}
 
+public extension Optional {
     static func ap<O>(_ function: ((Wrapped) -> O)?) -> (Self) -> O? {
         { input in
             switch (function, input) {

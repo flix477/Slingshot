@@ -7,11 +7,13 @@
 
 import Foundation
 
-public extension Array {
-    static func pure<T>(_ x: T) -> [T] {
+extension Array: Pure {
+    public static func pure(_ x: Element) -> [Element] {
         [x]
     }
+}
 
+public extension Array {
     static func ap<O>(functions: [(Element) -> O]) -> (Self) -> [O] {
         { inputs in
             functions.flatMap { f in

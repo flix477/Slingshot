@@ -69,26 +69,3 @@ public extension NonEmptyArray {
         rest.count + 1
     }
 }
-
-extension NonEmptyArray: Sequence {
-    public func makeIterator() -> NonEmptyArrayIterator<Element> {
-        NonEmptyArrayIterator(source: self)
-    }
-}
-
-public struct NonEmptyArrayIterator<Element>: IteratorProtocol {
-    private var count = 0
-    let source: NonEmptyArray<Element>
-
-    init(source: NonEmptyArray<Element>) {
-        self.source = source
-    }
-
-    public mutating func next() -> Element? {
-        defer { count += 1 }
-
-        return count == 0
-            ? source.first
-            : source.rest[optional: count - 1]
-    }
-}

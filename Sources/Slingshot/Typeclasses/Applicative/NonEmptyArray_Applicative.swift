@@ -7,11 +7,13 @@
 
 import Foundation
 
-public extension NonEmptyArray {
-    static func pure<T>(_ x: T) -> NonEmptyArray<T> {
-        NonEmptyArray<T>(first: x, rest: [])
+extension NonEmptyArray: Pure {
+    public static func pure(_ x: Element) -> NonEmptyArray<Element> {
+        NonEmptyArray<Element>(first: x, rest: [])
     }
+}
 
+public extension NonEmptyArray {
     static func ap<O>(_ functions: NonEmptyArray<(Element) -> O>) -> (Self) -> NonEmptyArray<O> {
         { inputs in
             functions.flatMap { f in

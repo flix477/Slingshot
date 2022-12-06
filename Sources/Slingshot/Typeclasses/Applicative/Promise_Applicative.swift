@@ -7,11 +7,14 @@
 
 import Foundation
 
-public extension Promise {
-    static func pure(_ x: Value) -> Promise<Value> {
-        Promise { handler in handler(x) }
+extension Promise: Pure {
+    public static func pure(_ x: Value) -> Self {
+        Promise { handler in handler(x) } as! Self
     }
+    
+}
 
+public extension Promise {
     static func ap<O>(_ function: Promise<(Value) -> O>) -> (Promise<Value>) -> Promise<O> {
         { input in
             function.flatMap { f in input.map(f) }

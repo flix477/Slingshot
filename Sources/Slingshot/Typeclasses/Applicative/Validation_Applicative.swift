@@ -7,11 +7,15 @@
 
 import Foundation
 
-public extension Validation {
-    static func pure<T>(_ x: T) -> Validation<Failure, T> {
+extension Validation: Pure {
+    public typealias PureA = Value
+    
+    public static func pure(_ x: Value) -> Validation<Failure, Value> {
         return .success(x)
     }
+}
 
+public extension Validation {
     static func ap<O>(_ function: Validation<Failure, (Value) -> O>) -> (Self) -> Validation<Failure, O> {
         { input in
             switch (function, input) {

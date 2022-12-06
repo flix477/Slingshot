@@ -10,6 +10,17 @@ import Quick
 import Nimble
 @testable import Slingshot
 
+typealias IntSet = Set<Int>
+@SequenceBuilder<IntSet>
+func yeet() -> IntSet {
+    Set([1, 2, 3, 2])
+    [0]
+    [1]
+    [2]
+    Optional<Int>.none
+    Optional<[Int]>.none.asArray.reduce([]) { acc, x in acc <> x }
+}
+
 class NonEmptyArray_Test: QuickSpec {
     override func spec() {
         describe("NonEmptyArray") {
@@ -22,6 +33,8 @@ class NonEmptyArray_Test: QuickSpec {
                     let array = NonEmptyArray<Int>(array: [1])
                     expect(array).toNot(beNil())
                     guard let arr = array else { return }
+                    
+                    print(yeet())
                     
                     expect(arr.first).to(be(1))
                     expect(arr.rest).to(beEmpty())

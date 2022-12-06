@@ -7,11 +7,13 @@
 
 import Foundation
 
-public extension Either {
-    static func pure<T>(_ x: T) -> Either<L, T> {
+extension Either: Pure {
+    public static func pure(_ x: R) -> Either<L, R> {
         .right(x)
     }
+}
 
+public extension Either {
     static func ap<O>(_ function: Either<L, (R) -> O>) -> (Self) -> Either<L, O> {
         { input in
             switch (function, input) {

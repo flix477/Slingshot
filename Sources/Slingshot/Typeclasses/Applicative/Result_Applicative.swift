@@ -7,11 +7,15 @@
 
 import Foundation
 
-public extension Result {
-    static func pure<T>(_ x: T) -> Result<T, Failure> {
+extension Result: Pure {
+    public typealias PureA = Success
+    
+    public static func pure(_ x: Success) -> Result<Success, Failure> {
         .success(x)
     }
+}
 
+public extension Result {
     static func ap<O>(_ function: Result<(Success) -> O, Failure>) -> (Self) -> Result<O, Failure> {
         { input in
             switch (function, input) {
