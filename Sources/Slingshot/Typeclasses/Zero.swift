@@ -23,6 +23,10 @@ extension Bool: Zero {
     public static var zero: Bool { false }
 }
 
+extension Float: Zero {
+    public static var zero: Float { 0 }
+}
+
 extension Dictionary: Zero {
     public static var zero: Dictionary { [:] }
 }

@@ -53,10 +53,6 @@ public extension Either {
             return .left(try transform(x))
         }
     }
-
-    func bimap<C, D>(onLeft: @escaping (L) throws -> C, onRight: @escaping (R) throws -> D) rethrows -> Either<C, D> {
-        return try map(onRight).mapLeft(onLeft)
-    }
 }
 
 public extension Either where L: Error {

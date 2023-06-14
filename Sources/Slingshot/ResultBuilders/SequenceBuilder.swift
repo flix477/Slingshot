@@ -9,12 +9,12 @@ import Foundation
 
 
 @resultBuilder
-struct SequenceBuilder<Container> where Container: Sequence & Monoid & Pure, Container.PureA == Container.Element {
-    static func buildPartialBlock<V>(first content: V) -> Container where V: Sequence, V.Element == Container.Element {
+public struct SequenceBuilder<Container> where Container: Sequence & Monoid & Pure, Container.PureA == Container.Element {
+    public static func buildPartialBlock<V>(first content: V) -> Container where V: Sequence, V.Element == Container.Element {
         Container.fromSequence(content)
     }
     
-    static func buildPartialBlock<V>(accumulated: Container, next: V) -> Container where V: Sequence, V.Element == Container.Element {
+    public static func buildPartialBlock<V>(accumulated: Container, next: V) -> Container where V: Sequence, V.Element == Container.Element {
         accumulated <> Container.fromSequence(next)
     }
 }

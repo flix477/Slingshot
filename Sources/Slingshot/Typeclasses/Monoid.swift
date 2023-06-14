@@ -18,6 +18,7 @@ public extension Monoid {
 extension Array: Monoid {}
 extension Bool: Monoid {}
 extension Double: Monoid {}
+extension Float: Monoid {}
 extension String: Monoid {}
 extension Set: Monoid {}
 extension Int: Monoid {}
