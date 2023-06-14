@@ -35,6 +35,7 @@ public class Promise<Value> {
         }
     }
     
+    @available(watchOS 6.0.0, *)
     @available(iOS 13.0.0, *)
     @available(macOS 10.15.0, *)
     var async: Value {

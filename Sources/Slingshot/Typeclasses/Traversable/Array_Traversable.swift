@@ -47,7 +47,7 @@ public extension Array {
         }
     }
 
-    func traverse<Value, Failure>(_ transform: @escaping (Element) -> Result<Value, Failure>) -> Result<[Value], Failure> {
+    func traverse<Value, Failure>(_ transform: @escaping (Element) -> Swift.Result<Value, Failure>) -> Swift.Result<[Value], Failure> {
         reduce(.success([])) { result, value in
             switch (result, transform(value)) {
             case (.failure(let error), _), (_, .failure(let error)):
@@ -89,7 +89,7 @@ public extension Array where Element: EitherProtocol {
 }
 
 public extension Array where Element: ResultProtocol {
-    var sequenced: Result<[Element.Success], Element.Failure> {
+    var sequenced: Swift.Result<[Element.Success], Element.Failure> {
         traverse(\.result)
     }
 }
