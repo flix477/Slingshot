@@ -15,7 +15,6 @@ public protocol OptionalProtocol {
 extension Optional: OptionalProtocol {
     public var value: Wrapped? { self }
 }
-
 public extension Sequence {
     func compactCast<T>(as type: T.Type) -> [T] {
         compactMap { $0 as? T }

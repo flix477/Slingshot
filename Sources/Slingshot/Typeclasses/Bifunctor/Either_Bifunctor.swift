@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2023-05-31.
-//
-
 import Foundation
 
 public extension Either {
