@@ -1,0 +1,5 @@
+extension \(type).NonEmpty: Semigroup {
+    public static func <> (lhs: Self, rhs: Self) -> Self {
+        Self(first: lhs.first, container: lhs.container <> rhs.container)
+    }
+}

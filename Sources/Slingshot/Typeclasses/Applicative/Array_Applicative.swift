@@ -1,12 +1,3 @@
-//
-//  Array.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-02.
-//
-
-import Foundation
-
 extension Array: Pure {
     public static func pure(_ x: Element) -> [Element] {
         [x]

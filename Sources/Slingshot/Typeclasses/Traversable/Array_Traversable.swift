@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-02.
-//
-
-import Foundation
-
 public extension Array {
     func traverse<T>(_ transform: @escaping (Element) -> T?) -> [T]? {
         reduce(into: []) { result, value in

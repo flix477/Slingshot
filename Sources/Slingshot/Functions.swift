@@ -1,5 +1,3 @@
-import Foundation
-
 public func compose<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C {
     { g(f($0)) }
 }

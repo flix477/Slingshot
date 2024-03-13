@@ -1,0 +1,32 @@
+extension \(type).NonEmpty: Sequence {
+    public typealias Iterator = \(type).Iterator
+    public typealias Element = \(type).Element
+
+    public func makeIterator() -> Self.Iterator {
+        container.makeIterator()
+    }
+}
+
+public extension \(type).NonEmpty {
+    func min(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows -> Element {
+        guard let minimum = try container.min(by: areInIncreasingOrder) else { return first }
+
+        return try areInIncreasingOrder(first, minimum) ? first : minimum
+    }
+
+    func max(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows -> Element {
+        guard let maximum = try container.min(by: areInIncreasingOrder) else { return first }
+
+        return try areInIncreasingOrder(first, maximum) ? maximum : first
+    }
+}
+
+//public extension \(type).NonEmpty where Element: Comparable {
+//    func min() -> Element {
+//        min(by: { $0 < $1 })
+//    }
+//
+//    func max() -> Element {
+//        max(by: { $0 < $1 })
+//    }
+//}

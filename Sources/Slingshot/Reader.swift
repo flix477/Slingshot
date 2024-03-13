@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-19.
-//
-
-import Foundation
-
 public struct Reader<Dependency, Result> {
     public let f: (Dependency) -> Result
 

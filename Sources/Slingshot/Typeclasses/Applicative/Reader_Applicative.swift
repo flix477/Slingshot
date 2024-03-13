@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-19.
-//
-
-import Foundation
-
 extension Reader: Pure {
     public static func pure(_ x: Result) -> Reader<Dependency, Result> {
         Reader<Dependency, Result> { dep in x }

@@ -1,0 +1,5 @@
+extension \(type).NonEmpty {
+    public static func pure(_ x: \(item)) -> Self {
+        Self(first: x, container: .pure(x))
+    }
+}

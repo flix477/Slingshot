@@ -1,0 +1,5 @@
+public extension \(type) {
+    func map<T>(_ transform: @escaping (\(typeArg)) -> T) -> \(type)<T> {
+        .init(MapSequence(sequence: self, transform: transform))
+    }
+}

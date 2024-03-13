@@ -1,0 +1,17 @@
+extension \(type) {
+    public struct NonEmpty {
+        public let first: \(item)
+        let container: \(fullyQualifiedType)
+        
+        enum CodingKeys: String, CodingKey {
+            case first
+            case container
+        }
+    }
+}
+
+public extension \(type).NonEmpty {
+    var erased: \(fullyQualifiedType) {
+        container
+    }
+}

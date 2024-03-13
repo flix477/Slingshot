@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2021-06-22.
-//
-
-import Foundation
-
 public protocol EitherProtocol {
     associatedtype L
     associatedtype R
@@ -51,6 +42,15 @@ public extension Either {
             return .right(x)
         case .left(let x):
             return .left(try transform(x))
+        }
+    }
+    
+    var swapped: Either<R, L> {
+        switch self {
+        case .right(let r):
+            .left(r)
+        case .left(let l):
+            .right(l)
         }
     }
 }

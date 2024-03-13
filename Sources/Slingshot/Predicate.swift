@@ -1,12 +1,3 @@
-//
-//  Predicate.swift
-//  
-//
-//  Created by Felix Leveille on 2022-11-18.
-//
-
-import Foundation
-
 public typealias Predicate<T> = (T) -> Bool
 
 public func keypath<T>(_ keypath: KeyPath<T, Bool>) -> Predicate<T> {

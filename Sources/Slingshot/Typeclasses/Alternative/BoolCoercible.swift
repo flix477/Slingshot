@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2021-07-05.
-//
-
-import Foundation
-
 public protocol BoolCoercible {
     var bool: Bool { get }
 }

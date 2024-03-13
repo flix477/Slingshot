@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-02.
-//
-
-import Foundation
-
 extension Either: Pure {
     public static func pure(_ x: R) -> Either<L, R> {
         .right(x)

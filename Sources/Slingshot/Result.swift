@@ -1,12 +1,3 @@
-//
-//  Result.swift
-//  
-//
-//  Created by Felix Leveille on 2021-12-27.
-//
-
-import Foundation
-
 public protocol ResultProtocol {
     associatedtype Failure: Error
     associatedtype Success

@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2021-06-22.
-//
-
-import Foundation
-
 public protocol Alternative {
     func alt(_ x: Self) -> Self
 }
