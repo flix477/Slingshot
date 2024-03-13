@@ -1,10 +1,3 @@
-//
-//  MaybeTest.swift
-//  fio
-//
-//  Created by Felix Leveille on 2021-07-05.
-//
-
 import Quick
 import Nimble
 @testable import Slingshot

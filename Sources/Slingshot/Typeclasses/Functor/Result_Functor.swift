@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-03.
-//
-
-import Foundation
-
 public extension Result {
     static func map<U>(_ transform: @escaping (Success) -> U) -> (Result<Success, Failure>) -> Result<U, Failure> {
         flip(Result<Success, Failure>.map)(transform)

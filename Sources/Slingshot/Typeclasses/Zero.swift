@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-03.
-//
-
-import Foundation
-
 public protocol Zero {
     static var zero: Self { get }
 }
@@ -45,4 +36,16 @@ extension Set: Zero {
 
 extension Int: Zero {
     public static var zero: Int { 0 }
+}
+
+public extension Optional where Wrapped: Zero {
+    var valueOrZero: Wrapped {
+        self ?? Wrapped.zero
+    }
+}
+
+extension Tuple: Zero where First: Zero, Second: Zero {
+    public static var zero: Tuple<First, Second> {
+        .init(.zero, .zero)
+    }
 }

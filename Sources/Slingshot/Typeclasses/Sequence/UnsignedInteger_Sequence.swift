@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2023-05-31.
-//
-
-import Foundation
-
 public struct UnsignedIntegerRangeIterator<T>: IteratorProtocol
 where T: UnsignedInteger {
     public let maxValue: T

@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2021-12-27.
-//
-
-import Foundation
-
 public protocol OptionalProtocol {
     associatedtype Wrapped
     var value: Wrapped? { get }
@@ -22,7 +13,7 @@ public extension Sequence {
     }
 }
 
-extension Sequence where Element: OptionalProtocol {
+public extension Sequence where Element: OptionalProtocol {
     var compacted: [Element.Wrapped] {
         compactMap(\.value)
     }

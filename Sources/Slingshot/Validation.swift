@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2021-08-02.
-//
-
-import Foundation
-
 public protocol ValidationProtocol {
     associatedtype Failure
     associatedtype Value
@@ -16,7 +7,7 @@ public protocol ValidationProtocol {
 
 public enum Validation<Failure, Value> {
     case success(Value)
-    case failure(NonEmptyArray<Failure>)
+    case failure([Failure].NonEmpty)
 }
 
 public extension Validation {
@@ -25,7 +16,7 @@ public extension Validation {
     }
 
     func fail(_ error: Failure) -> Validation<Failure, Value> {
-        let error: NonEmptyArray<Failure> = .pure(error)
+        let error: [Failure].NonEmpty = .pure(error)
         switch self {
         case .success:
             return .failure(error)
@@ -34,7 +25,7 @@ public extension Validation {
         }
     }
 
-    var either: Either<NonEmptyArray<Failure>, Value> {
+    var either: Either<[Failure].NonEmpty, Value> {
         switch self {
         case .success(let x): return .right(x)
         case .failure(let failures): return .left(failures)
@@ -44,7 +35,7 @@ public extension Validation {
     var failures: [Failure] {
         switch self {
         case .success: return .zero
-        case .failure(let xs): return xs.asArray
+        case .failure(let xs): return xs.erased
         }
     }
 

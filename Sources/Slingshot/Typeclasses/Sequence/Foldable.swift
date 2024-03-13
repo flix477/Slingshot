@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2021-06-23.
-//
-
-import Foundation
-
 public extension Sequence {
     func reduce<Output: Zero>(_ nextPartialResult: (Output, Element) throws -> Output) rethrows -> Output {
         try reduce(Output.zero, nextPartialResult)

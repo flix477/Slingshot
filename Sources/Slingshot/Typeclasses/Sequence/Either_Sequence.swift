@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-03.
-//
-
-import Foundation
-
 extension Either: Sequence {
     public struct RightIterator: IteratorProtocol {
         var value: Either<L, R>?

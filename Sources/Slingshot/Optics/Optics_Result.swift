@@ -1,12 +1,3 @@
-//
-//  Optics_Result.swift
-//  
-//
-//  Created by Felix Leveille on 2022-11-18.
-//
-
-import Foundation
-
 // no complicated lenses for this one, much easier to just use optional chaining
 // like result.success?.property result.failure?.property
 public extension Result {

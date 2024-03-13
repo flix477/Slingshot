@@ -1,0 +1,5 @@
+public extension \(type).NonEmpty {
+    func map<T>(_ transform: @escaping (\(item)) -> T) -> \(type)<T>.NonEmpty {
+        .init(first: transform(first), container: container.map(transform))
+    }
+}

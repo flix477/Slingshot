@@ -1,12 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Felix Leveille on 2022-01-02.
-//
-
-import Foundation
-
 extension Promise: Pure {
     public static func pure(_ x: Value) -> Self {
         Promise { handler in handler(x) } as! Self

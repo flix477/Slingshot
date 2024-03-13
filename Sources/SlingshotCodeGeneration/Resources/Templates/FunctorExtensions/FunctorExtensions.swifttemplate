@@ -1,0 +1,13 @@
+public extension \(type) {
+    func replace<C>(with x: C) -> \(type)<C> {
+        map(constant(x))
+    }
+    
+    static func replace<C>(with x: C) -> (\(type)<\(typeArg)>) -> \(type)<C> {
+        flip(\(type)<\(typeArg)>.replace(with:))(x)
+    }
+    
+    static func map<U>(_ transform: @escaping (\(typeArg)) -> U) -> (\(type)<\(typeArg)>) -> \(type)<U> {
+        { items in items.map(transform) }
+    }
+}
