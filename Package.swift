@@ -14,14 +14,13 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Quick/Nimble.git", from: "9.2.1"),
         .package(url: "https://github.com/Quick/Quick.git", from: "4.0.0"),
-        .package(url: "https://github.com/jpsim/Yams.git", from: "5.0.6"),
     ],
     targets: [
-        .target(name: "Slingshot", plugins: [.plugin(name: "SlingshotPlugin")]),
-        .plugin(name: "SlingshotPlugin", capability: .buildTool, dependencies: ["SlingshotCodeGeneration"]),
-        .executableTarget(name: "SlingshotCodeGeneration", 
-                          dependencies: ["Yams"],
-                          resources: [.copy("Resources")]),
+        .target(name: "Slingshot"),
+        .plugin(name: "SlingshotPlugin", 
+                capability: .command(intent: .custom(verb: "generate-slingshot",
+                                                     description: "generate code"),
+                                     permissions: [.writeToPackageDirectory(reason: "Yeeting the universe")])),
         .testTarget(
             name: "SlingshotTests",
             dependencies: ["Slingshot",

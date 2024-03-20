@@ -3,9 +3,9 @@ import Foundation
 struct ProtocolExtensionTemplate: Template {
     func generate(_ templateName: String,
                   for type: Configuration.StructMetadata,
-                  with configuration: Configuration) throws -> (name: String, contents: String) {
-        let root = "Resources/Templates/\(templateName)"
-        let templatePath = Bundle.module.url(forResource: "\(root)/\(templateName)", withExtension: "swifttemplate")!
+                  with configuration: Configuration,
+                  inRootPath rootPath: URL) throws -> (name: String, contents: String) {
+        let templatePath = rootPath.appending(path: "\(templateName).swifttemplate")
         let template = String(data: try Data(contentsOf: templatePath), encoding: .utf8)!
         let typeArg = type.elements ?? type.arguments?.first ?? ""
         let args = [#"\(type)"#: type.name,

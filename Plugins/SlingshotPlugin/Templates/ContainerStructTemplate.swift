@@ -3,9 +3,9 @@ import Foundation
 struct ContainerStructTemplate: Template {
     func generate(_ templateName: String,
                   for type: Configuration.StructMetadata,
-                  with configuration: Configuration) throws -> (name: String, contents: String) {
-        let root = "Resources/Templates/\(templateName)"
-        let templatePath = Bundle.module.url(forResource: "\(root)/\(templateName)", withExtension: "swifttemplate")!
+                  with configuration: Configuration,
+                  inRootPath rootPath: URL) throws -> (name: String, contents: String) {
+        let templatePath = rootPath.appending(path: "\(templateName).swifttemplate")
         let template = String(data: try Data(contentsOf: templatePath), encoding: .utf8)!
         let typeArg = type.elements ?? type.arguments?.first ?? ""
         let args = [#"\(type)"#: type.name,
@@ -16,10 +16,9 @@ struct ContainerStructTemplate: Template {
            .appending(type.conformances
             .compactMap { conformance in
                 guard let protocolMetadata = configuration.get(protocolMetadata: conformance.name) else { return nil }
+                let overloadPath = rootPath.appending(components: "Overloads", "\(conformance.name).swifttemplate")
                 
-                if let overloadPath = Bundle.module.url(forResource: "\(root)/Overloads/\(conformance.name)",
-                                                        withExtension: "swifttemplate"),
-                   let data = try? Data(contentsOf: overloadPath),
+                if let data = try? Data(contentsOf: overloadPath),
                    let overloadTemplate = String(data: data, encoding: .utf8) {
                     return apply(template: overloadTemplate, with: args)
                 }
