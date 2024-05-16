@@ -7,6 +7,17 @@ extension Dictionary {
             case first
             case container
         }
+        
+        public init(first: (key: Key, value: Value), container: Dictionary) {
+            self.first = first
+            self.container = container
+        }
+        
+        public init?(container: Dictionary) {
+            guard let first = container.first else { return nil }
+            self.first = first
+            self.container = container
+        }
     }
 }
 

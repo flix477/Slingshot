@@ -7,6 +7,17 @@ extension \(type) {
             case first
             case container
         }
+        
+        public init(first: \(item), container: \(fullyQualifiedType)) {
+            self.first = first
+            self.container = container
+        }
+        
+        public init?(container: \(fullyQualifiedType)) {
+            guard let first = container.first else { return nil }
+            self.first = first
+            self.container = container
+        }
     }
 }
 

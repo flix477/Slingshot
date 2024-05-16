@@ -7,6 +7,17 @@ extension String {
             case first
             case container
         }
+        
+        public init(first: Character, container: String) {
+            self.first = first
+            self.container = container
+        }
+        
+        public init?(container: String) {
+            guard let first = container.first else { return nil }
+            self.first = first
+            self.container = container
+        }
     }
 }
 

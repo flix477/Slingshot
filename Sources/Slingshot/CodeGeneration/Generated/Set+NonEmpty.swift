@@ -7,6 +7,17 @@ extension Set {
             case first
             case container
         }
+        
+        public init(first: Element, container: Set<Element>) {
+            self.first = first
+            self.container = container
+        }
+        
+        public init?(container: Set<Element>) {
+            guard let first = container.first else { return nil }
+            self.first = first
+            self.container = container
+        }
     }
 }
 

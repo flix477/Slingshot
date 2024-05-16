@@ -7,6 +7,17 @@ extension Array {
             case first
             case container
         }
+        
+        public init(first: Element, container: Array<Element>) {
+            self.first = first
+            self.container = container
+        }
+        
+        public init?(container: Array<Element>) {
+            guard let first = container.first else { return nil }
+            self.first = first
+            self.container = container
+        }
     }
 }
 
