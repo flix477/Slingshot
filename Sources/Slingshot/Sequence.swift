@@ -56,4 +56,8 @@ public extension Sequence {
     where Head: Sequence, Head.Element == Element {
         .init(prefix: head, tail: self)
     }
+    
+    var erased: AnySequence<Element> {
+        .init(makeIterator)
+    }
 }
