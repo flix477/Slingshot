@@ -38,7 +38,7 @@ where Prefix: AsyncSequence, Tail: AsyncSequence, Prefix.Element == Tail.Element
 }
 
 public extension AsyncSequence {
-    func prefixed<Head>(by head: Head) -> PrefixedSequence<Head, Self>
+    func prefixed<Head>(by head: Head) -> PrefixedAsyncSequence<Head, Self>
     where Head: AsyncSequence, Head.Element == Element {
         .init(prefix: head, tail: self)
     }
