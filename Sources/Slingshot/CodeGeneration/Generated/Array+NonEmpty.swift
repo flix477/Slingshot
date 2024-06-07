@@ -60,6 +60,9 @@ public extension Array.NonEmpty {
 //}
 
 
+extension Array.NonEmpty: Sendable where Array.Element: Sendable {}
+
+
 extension Array.NonEmpty: Collection {
 	public typealias Index = Array.Index
 	public typealias Indices = Array.Indices

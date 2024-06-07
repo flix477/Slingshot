@@ -60,6 +60,9 @@ public extension Dictionary.NonEmpty {
 //}
 
 
+extension Dictionary.NonEmpty: Sendable where Dictionary.Element: Sendable {}
+
+
 extension Dictionary.NonEmpty: Collection {
 	public typealias Index = Dictionary.Index
 	public typealias Indices = Dictionary.Indices

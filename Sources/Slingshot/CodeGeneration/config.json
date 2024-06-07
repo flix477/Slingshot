@@ -10,6 +10,10 @@
          ]
       },
       {
+         "name": "Sendable",
+         "properties": []
+      },
+      {
          "name": "Collection",
          "associatedTypes": [
             "Index",
@@ -87,6 +91,9 @@
                "name": "Sequence"
             },
             {
+               "name": "Sendable"
+            },
+            {
                "name": "Collection"
             },
             {
@@ -125,6 +132,9 @@
                "name": "Sequence"
             },
             {
+               "name": "Sendable"
+            },
+            {
                "name": "Collection"
             },
             {
@@ -152,6 +162,9 @@
          "conformances": [
             {
                "name": "Sequence"
+            },
+            {
+               "name": "Sendable"
             },
             {
                "name": "Collection"
