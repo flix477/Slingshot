@@ -61,3 +61,11 @@ public extension Sequence {
         .init(makeIterator)
     }
 }
+
+
+public extension Sequence where Element: FloatingPoint {
+    var mean: Element? {
+        let count = Element(count)
+        return count > 0 ? reduce(0, +) / count : nil
+    }
+}
