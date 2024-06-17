@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Slingshot",
-    platforms: [.macOS(.v10_13), .iOS(.v16)],
+    platforms: [.macOS(.v10_15), .iOS(.v16)],
     products: [
         .library(
             name: "Slingshot",
